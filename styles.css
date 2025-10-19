@@ -5,8 +5,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Roboto,
-    ‘Helvetica Neue’, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   display: flex;
@@ -16,8 +16,11 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 520px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {
@@ -26,30 +29,31 @@ body {
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   position: relative;
+  width: 100%;
 }
 
+/* HEADER SECTION */
 .card-header {
   background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
-  height: 220px;
+  height: 240px;
   position: relative;
 }
 
 .profile-image {
   position: absolute;
-  top: 140px;
+  top: 160px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
 }
 
 .profile-image img {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   border: 6px solid white;
-  display: block;
   object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .status-indicator {
@@ -65,7 +69,7 @@ body {
 }
 
 .status-indicator::after {
-  content: ‘’;
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -76,16 +80,17 @@ body {
   border-radius: 50%;
 }
 
+/* CARD BODY */
 .card-body {
-  padding: 90px 40px 40px;
+  padding: 100px 45px 45px;
   text-align: center;
 }
 
 .current-time {
   color: #6b7280;
   font-size: 14px;
-  margin-bottom: 16px;
-  font-family: ‘Courier New’, monospace;
+  margin-bottom: 18px;
+  font-family: 'Courier New', monospace;
 }
 
 #timestamp {
@@ -94,32 +99,32 @@ body {
 }
 
 .name {
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 700;
   color: #1f2937;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .bio {
   color: #4b5563;
-  line-height: 1.6;
+  line-height: 1.7;
   font-size: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .divider {
   height: 3px;
   background: linear-gradient(90deg, #ff6b6b 0%, #ff5252 100%);
   border-radius: 2px;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
   border: none;
 }
 
 .info-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 35px;
+  gap: 45px;
+  margin-bottom: 40px;
 }
 
 .hobbies h2,
@@ -127,7 +132,7 @@ body {
   font-size: 18px;
   font-weight: 700;
   color: #1f2937;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .hobbies ul,
@@ -139,20 +144,21 @@ body {
 .dislikes ul li {
   color: #6b7280;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   position: relative;
   padding-left: 8px;
 }
 
 .hobbies ul li::before,
 .dislikes ul li::before {
-  content: ‘•’;
+  content: '•';
   position: absolute;
   left: -8px;
   color: #ff6b6b;
   font-weight: bold;
 }
 
+/* SOCIAL ICONS */
 .social-icons {
   display: flex;
   justify-content: center;
@@ -178,20 +184,158 @@ body {
   height: 28px;
 }
 
-@media (max-width: 600px) {
+/* ======================
+   MOBILE VIEW (CENTERED)
+   ====================== */
+@media (max-width: 767px) {
+  body {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    margin: 0 auto;
+  }
+
   .card-body {
-    padding: 90px 30px 30px;
+    padding: 100px 35px 40px;
   }
 
   .info-section {
-    gap: 30px;
+    gap: 35px;
   }
 
   .name {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   .bio {
+    font-size: 15px;
+  }
+}
+
+/* ======================
+   DESKTOP VIEW (HORIZONTAL + RED/WHITE BACKGROUND)
+   ====================== */
+@media (min-width: 768px) {
+  body {
+    background: linear-gradient(90deg, #ff5252 50%, #ffffff 50%);
+  }
+
+  .container {
+    max-width: 900px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    border: 3px solid #ff5252;
+    box-shadow: 0 20px 60px rgba(255, 82, 82, 0.3);
+  }
+
+  .card-header {
+    display: none;
+  }
+
+  .profile-image {
+    position: static;
+    transform: none;
+    background: #fff5f5;
+    padding: 50px 35px 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 260px;
+    gap: 25px;
+  }
+
+  .profile-image img {
+    width: 150px;
+    height: 150px;
+    border: 5px solid #ff5252;
+    box-shadow: 0 8px 24px rgba(255, 82, 82, 0.3);
+  }
+
+  .social-icons {
+    margin-top: 0;
+    flex-direction: row;
+    gap: 18px;
+  }
+
+  .icon-link {
+    background: #fff5f5;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid #ffe5e5;
+  }
+
+  .icon-link:hover {
+    background: #ff5252;
+    color: white;
+    border-color: #ff5252;
+    transform: translateY(-3px);
+  }
+
+  .card-body {
+    flex: 1;
+    padding: 45px 50px;
+    text-align: left;
+    background: white;
+  }
+
+  .current-time {
+    text-align: right;
+    margin-bottom: 12px;
+    font-size: 12px;
+    border: 2px solid #ff5252;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: white;
+    color: #4b5563;
+  }
+
+  #timestamp {
+    color: #1f2937;
+  }
+
+  .name {
+    font-size: 42px;
+    margin-bottom: 18px;
+    font-weight: 800;
+    color: #000;
+  }
+
+  .divider {
+    margin-bottom: 28px;
+  }
+
+  .info-section {
+    gap: 70px;
+  }
+
+  .hobbies h2,
+  .dislikes h2 {
+    font-size: 18px;
+    margin-bottom: 14px;
+    font-weight: 800;
+  }
+
+  .hobbies ul li,
+  .dislikes ul li {
     font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .hobbies ul li::before,
+  .dislikes ul li::before {
+    color: #ff5252;
   }
 }
