@@ -1,0 +1,594 @@
+/* =========================
+   styles.css — Desktop-centered info-grid
+   - Hobbies/Dislikes centered on desktop
+   - navbar not fixed
+   - nav UL left-to-right on mobile
+   - name & main text centered on mobile
+   - hobbies/dislikes left-to-right on mobile (flex wrap on very small)
+   ========================= */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base / Body */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* =========================
+   NAVIGATION (non-fixed)
+   ========================= */
+.main-nav {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  position: static; /* explicitly not fixed/sticky */
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* allow wrapping on tiny screens */
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-brand:hover {
+  color: #764ba2;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start; /* left aligned */
+  flex-wrap: nowrap;            /* keep left-to-right */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-links::-webkit-scrollbar {
+  height: 6px;
+}
+.nav-links::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.06);
+  border-radius: 6px;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  transition: all 0.18s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.06);
+}
+
+.nav-links a.active {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.12);
+}
+
+.nav-links a:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* =========================
+   PAGE LAYOUT
+   ========================= */
+.page-container {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+/* Smaller container used for the card / centered pages */
+.container {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* =========================
+   PROFILE CARD
+   ========================= */
+.profile-card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+  height: 280px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0;
+}
+
+.profile-image-wrapper {
+  position: absolute;
+  bottom: -75px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: white;
+  padding: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Card Body */
+.card-body {
+  padding: 90px 40px 40px;
+  text-align: center; /* default center for desktop header view */
+}
+
+.current-time {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 16px;
+  font-family: "Courier New", monospace;
+}
+
+#timestamp {
+  color: #333;
+  font-weight: 600;
+}
+
+.profile-name {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.profile-bio {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* decorative divider */
+.divider {
+  border: none;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ff6b6b, transparent);
+  margin: 32px 0;
+}
+
+/* =========================
+   INFO GRID (DESKTOP CENTERED)
+   ========================= */
+/* Desktop-centered layout:
+   - use flex to center the two info columns horizontally
+   - each column has a comfortable max width */
+.info-grid {
+  display: flex;
+  justify-content: center; /* centers the columns horizontally */
+  align-items: flex-start;
+  gap: 80px;                /* comfortable spacing on desktop */
+  margin-bottom: 32px;
+}
+
+.info-column {
+  text-align: center;
+  width: 280px;             /* control column width on desktop */
+  max-width: 36ch;
+}
+
+.info-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  text-align: left; /* title left-aligned within the column for readability */
+}
+
+.info-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.info-list li {
+  color: #666;
+  font-size: 15px;
+  padding: 8px 0;
+  margin-left: 0;
+  text-align: left; /* items left-aligned inside the column */
+}
+
+/* Card Footer / Socials */
+.card-footer {
+  padding: 0 40px 40px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 6px;
+}
+
+.social-link {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff6b6b;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.social-link svg {
+  width: 32px;
+  height: 32px;
+}
+
+.social-link:hover {
+  color: #ff5252;
+  transform: translateY(-4px);
+}
+
+.social-link:focus {
+  outline: 2px solid #ff6b6b;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* =========================
+   CONTACT / ABOUT (card-like)
+   ========================= */
+.content-card,
+.contact-content {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h1 {
+  font-size: 2rem;
+  color: #1a1a1a;
+}
+
+.section-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Form controls */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.required {
+  color: #ff6b6b;
+  margin-left: 0.25rem;
+}
+
+.form-input,
+.form-textarea {
+  padding: 0.875rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.18s ease;
+  background: #fafafa;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+}
+
+/* =========================
+   RESPONSIVE ADJUSTMENTS
+   ========================= */
+
+/* Tablet and up (layout tweaks) */
+@media (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .card-body {
+    padding: 75px 50px 45px;
+    text-align: left;
+  }
+
+  /* On tablet+ we want the info columns to remain centered horizontally.
+     Keep info-grid as flex (already set) and reduce gap for mid widths. */
+  .info-grid {
+    gap: 48px;
+  }
+
+  .info-column {
+    width: 260px;
+  }
+
+  .info-title,
+  .info-list li {
+    text-align: left;
+  }
+}
+
+/* Mobile (<= 600px)
+   - name & card text centered
+   - nav ul left-to-right (keeps L->R)
+   - info grid remains two columns when possible (left-to-right)
+*/
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0 12px;
+  }
+
+  /* Profile card sizing */
+  .profile-card {
+    border-radius: 20px;
+  }
+
+  .card-header {
+    height: 240px;
+  }
+
+  .profile-image-wrapper {
+    width: 120px;
+    height: 120px;
+    bottom: -60px;
+  }
+
+  /* Center main card content on mobile */
+  .card-body {
+    padding: 75px 20px 32px;
+    text-align: center; /* center the content */
+  }
+
+  .profile-name {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .profile-bio {
+    font-size: 15px;
+    text-align: center;
+  }
+
+  /* Info grid: prefer two columns (left-to-right) on most phones */
+  .info-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 24px;
+  }
+
+  .info-column {
+    text-align: left; /* keep titles & lists left-aligned inside each column */
+    width: auto;
+  }
+
+  .info-title {
+    font-size: 18px;
+  }
+
+  .info-list li {
+    font-size: 14px;
+    padding: 6px 0;
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .card-footer {
+    padding: 0 24px 32px;
+  }
+
+  .social-link {
+    width: 44px;
+    height: 44px;
+  }
+
+  .social-link svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Nav: keep brand + links in a row, links left-to-right */
+  .nav-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .nav-brand {
+    text-align: left;
+    width: auto;
+  }
+
+  .nav-links {
+    flex-direction: row;   /* left-to-right */
+    gap: 0.6rem;
+    width: auto;
+    max-width: calc(100% - 140px); /* leave room for brand */
+    justify-content: flex-start;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 0.45rem 0.6rem;
+  }
+}
+
+/* Very small phones (<= 400px)
+   - keep hobbies & dislikes L->R where possible using flex with wrap
+*/
+@media (max-width: 400px) {
+  .card-header {
+    height: 200px;
+  }
+
+  .profile-image-wrapper {
+    width: 100px;
+    height: 100px;
+    bottom: -50px;
+  }
+
+  .card-body {
+    padding: 65px 16px 24px;
+  }
+
+  .profile-name {
+    font-size: 24px;
+  }
+
+  .profile-bio {
+    font-size: 14px;
+  }
+
+  /* Use flex with wrap to try to keep two columns side-by-side when possible */
+  .info-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .info-column {
+    width: calc(50% - 8px);
+    min-width: 140px; /* prevent columns from collapsing too small */
+    text-align: left;
+  }
+
+  /* If the viewport gets extremely narrow, columns fall back to full width */
+  @media (max-width: 320px) {
+    .info-column {
+      width: 100%;
+    }
+  }
+
+  .info-title {
+    font-size: 16px;
+  }
+
+  .current-time {
+    font-size: 12px;
+  }
+
+  .social-links {
+    gap: 12px;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+  }
+
+  .social-link svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Print rules */
+@media print {
+  body {
+    background: white;
+  }
+
+  .profile-card,
+  .content-card,
+  .contact-content {
+    box-shadow: none;
+  }
+
+  .main-nav {
+    display: none;
+  }
+}
