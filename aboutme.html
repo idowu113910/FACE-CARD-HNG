@@ -1,64 +1,240 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>About Me - Idowu Daniel</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <div id="nav-placeholder"></div>
-
-    <div id="about" class="page active" data-testid="about-page">
-      <div class="content-card">
-        <h1 data-testid="about-title">About Me</h1>
-
-        <div class="about-section" data-testid="journey-section">
-          <h2>My Journey</h2>
-          <p data-testid="about-journey">
-            My journey into web development started with a curiosity about how
-            websites work. From building my first HTML page to mastering modern
-            frameworks, every step has been an exciting learning experience. I'm
-            passionate about creating web applications that are not only
-            functional but also beautiful and accessible to everyone.
-          </p>
-        </div>
-
-        <div class="about-section" data-testid="learnings-section">
-          <h2>What I've Learned in This Stage</h2>
-          <p data-testid="about-learnings">
-            In Stage 1, I've expanded my skills by building multi-page
-            applications with client-side routing. I've learned the importance
-            of form validation, both for user experience and data integrity.
-            Implementing accessible forms with proper ARIA labels and error
-            messaging has taught me how crucial it is to build inclusive web
-            experiences. The challenge of maintaining semantic HTML while
-            creating dynamic, interactive pages has reinforced the fundamentals
-            of good web development.
-          </p>
-        </div>
-
-        <div class="about-section" data-testid="philosophy-section">
-          <h2>My Development Philosophy</h2>
-          <p data-testid="about-philosophy">
-            I believe in writing clean, maintainable code that prioritizes user
-            experience and accessibility. Every project is an opportunity to
-            learn something new and push the boundaries of what's possible on
-            the web. I'm committed to continuous improvement and staying current
-            with web standards and best practices.
-          </p>
-        </div>
-
-        <div class="about-section" data-testid="personal-section">
-          <h2>Beyond Code</h2>
-          <p data-testid="about-personal">
-            When I'm not coding, I enjoy exploring new technologies,
-            contributing to open-source projects, and sharing knowledge with the
-            developer community. I believe that the best developers are those
-            who never stop learning and are always willing to help others grow.
-          </p>
-        </div>
+  <body data-test-id="body">
+    <nav class="main-nav" data-test-id="main-navigation">
+      <div class="nav-container">
+        <a href="index.html" class="nav-brand" data-test-id="nav-brand"
+          >Idowu Daniel</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html" data-test-id="nav-home">Home</a></li>
+          <li>
+            <a href="aboutme.html" class="active" data-test-id="nav-about"
+              >About</a
+            >
+          </li>
+          <li><a href="contact.html" data-test-id="nav-contact">Contact</a></li>
+        </ul>
       </div>
-    </div>
+    </nav>
+
+    <main class="page-container about-page" data-testid="test-about-page">
+      <header class="page-header" data-test-id="page-header">
+      
+     
+      </header>
+
+      <article class="about-content" data-test-id="about-content">
+        <section class="about-section" data-testid="test-about-bio">
+          <h2 class="section-title">Bio</h2>
+          <div class="section-content">
+            <p>
+              Hello! I'm Idowu Daniel, a passionate front-end developer
+              dedicated to creating meaningful digital experiences. My journey
+              into web development started with a curiosity about how websites
+              work and evolved into a deep passion for building clean,
+              accessible, and user-friendly interfaces.
+            </p>
+            <p>
+              I believe that great web development is about more than just
+              writing code—it's about understanding people, solving real
+              problems, and creating experiences that make a difference. Every
+              project I work on is an opportunity to learn something new and
+              push the boundaries of what's possible with modern web
+              technologies.
+            </p>
+            <p>
+              When I'm not coding, you'll find me reading tech blogs, exercising
+              to stay sharp, or exploring new frameworks and tools. I'm
+              constantly seeking ways to improve my craft and stay updated with
+              the ever-evolving world of web development.
+            </p>
+          </div>
+        </section>
+
+        <section class="about-section" data-testid="test-about-goals">
+          <h2 class="section-title">My Goals in This Program</h2>
+          <div class="section-content">
+            <p>
+              Joining this program is a significant step in my development
+              journey. Here's what I aim to achieve:
+            </p>
+            <ul class="goals-list">
+              <li>
+                <h3>Master Advanced React Patterns</h3>
+                <p>
+                  Deepen my understanding of React's advanced concepts,
+                  including custom hooks, context optimization, and performance
+                  tuning to build scalable applications.
+                </p>
+              </li>
+              <li>
+                <h3>Build Real-World Projects</h3>
+                <p>
+                  Create portfolio-worthy projects that solve real problems and
+                  demonstrate my ability to handle complex requirements from
+                  conception to deployment.
+                </p>
+              </li>
+              <li>
+                <h3>Collaborate and Network</h3>
+                <p>
+                  Connect with fellow developers, learn from their experiences,
+                  and contribute to a collaborative learning environment where
+                  we all grow together.
+                </p>
+              </li>
+              <li>
+                <h3>Develop Professional Skills</h3>
+                <p>
+                  Beyond technical skills, I want to improve my code review
+                  abilities, communication in technical discussions, and project
+                  management skills.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="about-section" data-testid="test-about-confidence">
+          <h2 class="section-title">Areas of low Confidence</h2>
+          <div class="section-content">
+            <p>
+              Growth comes from acknowledging our areas of improvement. Here are
+              the areas where I'm actively working to build more confidence:
+            </p>
+            <ul class="confidence-list">
+              <li>
+                <h3>Backend Integration & APIs</h3>
+                <p>
+                  While I'm comfortable with front-end development, integrating
+                  complex backend systems and working with various API
+                  architectures is an area where I want to gain more hands-on
+                  experience and confidence.
+                </p>
+              </li>
+              <li>
+                <h3>System Design & Architecture</h3>
+                <p>
+                  Making architectural decisions for large-scale applications is
+                  challenging. I'm learning to think more strategically about
+                  scalability, maintainability, and long-term project
+                  sustainability.
+                </p>
+              </li>
+              <li>
+                <h3>Testing & Test-Driven Development</h3>
+                <p>
+                  Writing comprehensive test suites is crucial, but it's a skill
+                  I'm still developing. I want to become more proficient in unit
+                  testing, integration testing, and end-to-end testing
+                  strategies.
+                </p>
+              </li>
+            
+            </ul>
+          </div>
+        </section>
+
+        <section
+          class="about-section highlight-section"
+          data-testid="test-about-future-note"
+        >
+          <h2 class="section-title">A Note to My Future Self</h2>
+          <div class="section-content">
+            <div class="note-card">
+              <p class="note-greeting">Dear Future Idowu,</p>
+              <p>
+                If you're reading this, I hope you've come far from where you
+                started. Remember the excitement and nervousness you felt at the
+                beginning of this journey? Hold onto that feeling—it's what
+                drives growth.
+              </p>
+              <p>
+                Remember that every expert was once a beginner. The challenges
+                you faced—whether debugging that persistent error at 2 AM or
+                feeling overwhelmed by new concepts—were all part of the
+                process. They made you stronger and more resilient.
+              </p>
+              <p>Keep these principles close:</p>
+              <ul class="note-principles">
+                <li>
+                  Never stop learning. Technology evolves, and so should you.
+                </li>
+                <li>
+                  Be kind to yourself. Mistakes are lessons, not failures.
+                </li>
+                <li>
+                  Help others on their journey. Share what you've learned.
+                </li>
+                <li>Stay curious. Ask "why" and "how" about everything.</li>
+                <li>
+                  Celebrate small wins. Progress isn't always obvious, but it's
+                  always happening.
+                </li>
+              </ul>
+              <p>
+                Look back at this moment and be proud of how far you've come.
+                And remember: the journey never really ends—there's always
+                something new to discover, create, and master.
+              </p>
+              <p class="note-signature">
+                Keep building, keep growing,<br />Idowu (The Earlier Version)
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="about-section" data-testid="test-about-extra">
+          <h2 class="section-title">Additional Thoughts</h2>
+          <div class="section-content">
+            <h3>Why Web Development?</h3>
+            <p>
+              The web is the most accessible platform in human history. Building
+              for the web means creating tools and experiences that can reach
+              billions of people regardless of their location or background.
+              That impact potential is what drew me to web development.
+            </p>
+
+            <h3>My Development Philosophy</h3>
+            <p>
+              I believe in writing code that others (including my future self)
+              can understand and maintain. Clean code, proper documentation, and
+              thoughtful architecture aren't just best practices—they're acts of
+              respect for the developers who will work with your code later.
+            </p>
+
+            <h3>Beyond the Code</h3>
+            <p>
+              Technology is a tool, but the goal is always to serve people.
+              Whether it's making a website more accessible, improving load
+              times for users on slower connections, or creating interfaces that
+              bring joy to everyday tasks—the human element is what matters
+              most.
+            </p>
+
+            <h3>Looking Forward</h3>
+            <p>
+              I'm excited about the future of web development—WebAssembly,
+              progressive web apps, AI-assisted development, and new frameworks
+              that make building better experiences easier. But more than any
+              specific technology, I'm excited about the problems we'll solve
+              and the positive impact we can make together.
+            </p>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer" data-test-id="site-footer">
+      <p>&copy; 2025 Idowu Daniel. All rights reserved.</p>
+    </footer>
   </body>
 </html>

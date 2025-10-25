@@ -1,184 +1,168 @@
-// app.js — improved single-file SPA + form validation
-document.addEventListener("DOMContentLoaded", () => {
-  // ----- Navigation (hash-based SPA) -----
-  const navLinks = Array.from(document.querySelectorAll(".nav-link"));
-  const pages = Array.from(document.querySelectorAll(".page"));
-
-  function getDefaultPageId() {
-    return "home";
-  }
-
-  function showPage(pageId) {
-    // fallback to default if page doesn't exist
-    const targetPage = document.getElementById(pageId) || document.getElementById(getDefaultPageId());
-    if (!targetPage) return;
-
-    // hide all pages, remove active from links
-    pages.forEach((p) => p.classList.remove("active"));
-    navLinks.forEach((l) => l.classList.remove("active"));
-
-    // show target page
-    targetPage.classList.add("active");
-
-    // mark corresponding nav link (if exists)
-    const targetLink = document.querySelector(`a[href="#${pageId}"]`);
-    if (targetLink) targetLink.classList.add("active");
-
-    // accessibility: move focus to a heading inside the page (if present)
-    const heading = targetPage.querySelector("h1, h2, h3");
-    if (heading) {
-      heading.setAttribute("tabindex", "-1");
-      heading.focus({ preventScroll: true });
-    }
-
-    // smooth scroll to top
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  // add click handlers to nav links (only handle hash links)
-  navLinks.forEach((link) => {
-    const href = link.getAttribute("href") || "";
-    // Only intercept links that are hashes for SPA behavior
-    if (!href.startsWith("#")) return;
-
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const pageId = href.substring(1) || getDefaultPageId();
-      showPage(pageId);
-      // update URL hash and push history state
-      history.pushState({ page: pageId }, "", `#${pageId}`);
-    });
-  });
-
-  // handle back/forward (popstate) and direct hash changes
-  window.addEventListener("popstate", () => {
-    const pageId = (location.hash && location.hash.substring(1)) || getDefaultPageId();
-    showPage(pageId);
-  });
-
-  // also react to hashchange just in case
-  window.addEventListener("hashchange", () => {
-    const pageId = (location.hash && location.hash.substring(1)) || getDefaultPageId();
-    showPage(pageId);
-  });
-
-  // initial page on load
-  const initialPage = (location.hash && location.hash.substring(1)) || getDefaultPageId();
-  showPage(initialPage);
-
-  // ----- Form Validation (robust + DRY) -----
-  const contactForm = document.getElementById("contactForm");
+// Contact Form Validation
+(function () {
+  const form = document.getElementById("contactFor");
   const successMessage = document.getElementById("successMessage");
 
-  // helper to safely get element by id
-  const $ = (id) => document.getElementById(id);
-
+  // Field configurations
   const fields = {
-    name: {
-      element: $("name"),
-      error: $("nameError"),
-      validate: (v) => typeof v === "string" && v.trim().length >= 2,
+    fullName: {
+      element: document.querySelector('[data-testid="test-contact-name"]'),
+      error: document.querySelector('[data-testid="test-contact-error-name"]'),
+      validate: (value) => {
+        if (!value.trim()) {
+          return "Full name is required";
+        }
+        if (value.trim().length < 2) {
+          return "Full name must be at least 2 characters";
+        }
+        return "";
+      },
     },
     email: {
-      element: $("email"),
-      error: $("emailError"),
-      validate: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+      element: document.querySelector('[data-testid="test-contact-email"]'),
+      error: document.querySelector('[data-testid="test-contact-error-email"]'),
+      validate: (value) => {
+        if (!value.trim()) {
+          return "Email address is required";
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          return "Please enter a valid email address (e.g., name@example.com)";
+        }
+        return "";
+      },
     },
     subject: {
-      element: $("subject"),
-      error: $("subjectError"),
-      validate: (v) => typeof v === "string" && v.trim() !== "",
+      element: document.querySelector('[data-testid="test-contact-subject"]'),
+      error: document.querySelector(
+        '[data-testid="test-contact-error-subject"]'
+      ),
+      validate: (value) => {
+        if (!value.trim()) {
+          return "Subject is required";
+        }
+        if (value.trim().length < 3) {
+          return "Subject must be at least 3 characters";
+        }
+        return "";
+      },
     },
     message: {
-      element: $("message"),
-      error: $("messageError"),
-      validate: (v) => typeof v === "string" && v.trim().length >= 10,
+      element: document.querySelector('[data-testid="test-contact-message"]'),
+      error: document.querySelector(
+        '[data-testid="test-contact-error-message"]'
+      ),
+      validate: (value) => {
+        if (!value.trim()) {
+          return "Message is required";
+        }
+        if (value.trim().length < 10) {
+          return "Message must be at least 10 characters";
+        }
+        return "";
+      },
     },
   };
 
+  // Show error message
+  function showError(fieldName, message) {
+    const field = fields[fieldName];
+    field.error.textContent = message;
+    field.error.style.display = message ? "block" : "none";
+    field.element.classList.toggle("input-error", !!message);
+    field.element.setAttribute("aria-invalid", !!message);
+  }
+
+  // Clear error message
+  function clearError(fieldName) {
+    showError(fieldName, "");
+  }
+
+  // Validate single field
   function validateField(fieldName) {
     const field = fields[fieldName];
-    if (!field || !field.element) return true; // if a field is missing, treat as valid
+    const value = field.element.value;
+    const errorMessage = field.validate(value);
+    showError(fieldName, errorMessage);
+    return !errorMessage;
+  }
 
-    const value = field.element.value ?? "";
-    const isValid = Boolean(field.validate(value));
-
-    if (isValid) {
-      field.element.classList.remove("error");
-      field.error?.classList.remove("show");
-      field.element.removeAttribute("aria-invalid");
-    } else {
-      field.element.classList.add("error");
-      field.error?.classList.add("show");
-      field.element.setAttribute("aria-invalid", "true");
-    }
-
+  // Validate all fields
+  function validateForm() {
+    let isValid = true;
+    Object.keys(fields).forEach((fieldName) => {
+      if (!validateField(fieldName)) {
+        isValid = false;
+      }
+    });
     return isValid;
   }
 
-  // attach listeners for fields that actually exist
+  // Add real-time validation on blur
   Object.keys(fields).forEach((fieldName) => {
-    const f = fields[fieldName];
-    if (!f || !f.element) return;
+    const field = fields[fieldName];
 
-    // blur validation
-    f.element.addEventListener("blur", () => validateField(fieldName));
+    field.element.addEventListener("blur", () => {
+      validateField(fieldName);
+    });
 
-    // validate while typing only if already invalid to avoid noisy UX
-    f.element.addEventListener("input", () => {
-      if (f.element.classList.contains("error")) validateField(fieldName);
+    field.element.addEventListener("input", () => {
+      if (field.error.textContent) {
+        validateField(fieldName);
+      }
+    });
+
+    // Clear error on focus
+    field.element.addEventListener("focus", () => {
+      field.element.classList.remove("input-error");
     });
   });
 
-  // form submit handling
-  if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+  // Handle form submission
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-      let isFormValid = true;
+    // Hide success message if visible
+    successMessage.style.display = "none";
+
+    // Validate all fields
+    const isValid = validateForm();
+
+    if (isValid) {
+      // Show success message
+      successMessage.style.display = "block";
+
+      // Scroll to success message
+      successMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+      // Reset form
+      form.reset();
+
+      // Clear all error states
       Object.keys(fields).forEach((fieldName) => {
-        if (!validateField(fieldName)) isFormValid = false;
+        clearError(fieldName);
+        fields[fieldName].element.classList.remove("input-error");
+        fields[fieldName].element.setAttribute("aria-invalid", "false");
       });
 
-      if (isFormValid) {
-        // show success
-        successMessage?.classList.add("show");
+      // Focus on success message for screen readers
+      successMessage.focus();
 
-        // reset form
-        contactForm.reset();
-
-        // clear error states
-        Object.keys(fields).forEach((fieldName) => {
-          const f = fields[fieldName];
-          if (f?.element) {
-            f.element.classList.remove("error");
-            f.error?.classList.remove("show");
-            f.element.removeAttribute("aria-invalid");
-          }
-        });
-
-        // hide success after a while
-        setTimeout(() => successMessage?.classList.remove("show"), 5000);
-      } else {
-        // focus first invalid input
-        const firstInvalid = Object.keys(fields).find(
-          (name) => fields[name]?.element && fields[name].element.classList.contains("error")
-        );
-        if (firstInvalid) fields[firstInvalid].element.focus();
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 5000);
+    } else {
+      // Focus on first error field
+      const firstErrorField = Object.keys(fields).find(
+        (fieldName) => fields[fieldName].error.textContent
+      );
+      if (firstErrorField) {
+        fields[firstErrorField].element.focus();
       }
-    });
-  }
-
-  // Optional: keyboard accessible nav (activate link with Enter when focused)
-  navLinks.forEach((link) => {
-    link.addEventListener("keydown", (e) => {
-      const href = link.getAttribute("href") || "";
-      if ((e.key === "Enter" || e.key === " ") && href.startsWith("#")) {
-        e.preventDefault();
-        const pageId = href.substring(1) || getDefaultPageId();
-        showPage(pageId);
-        history.pushState({ page: pageId }, "", `#${pageId}`);
-      }
-    });
+    }
   });
-});
+
+  // Make success message focusable for accessibility
+  successMessage.setAttribute("tabindex", "-1");
+})();

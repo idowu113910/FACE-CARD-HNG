@@ -4,705 +4,147 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Idowu Daniel - Frontend Developer</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-      }
-
-      /* Navigation */
-      nav {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 1rem 2rem;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-      }
-
-      nav ul {
-        list-style: none;
-        display: flex;
-        gap: 2rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      nav a {
-        text-decoration: none;
-        color: #667eea;
-        font-weight: 600;
-        transition: color 0.3s;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-      }
-
-      nav a:hover,
-      nav a.active {
-        color: #764ba2;
-        background: rgba(102, 126, 234, 0.1);
-      }
-
-      /* Page Container */
-      .page-container {
-        padding: 20px;
-      }
-
-      .page {
-        display: none;
-      }
-
-      .page.active {
-        display: block;
-      }
-
-      /* ========== HOME PAGE (Stage 0) STYLES ========== */
-      #home {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: calc(100vh - 70px);
-      }
-
-      .container {
-        max-width: 520px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .card {
-        background: white;
-        border-radius: 24px;
-        overflow: hidden;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        position: relative;
-        width: 100%;
-      }
-
-      .card-header {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
-        height: 240px;
-        position: relative;
-      }
-
-      .profile-image {
-        position: absolute;
-        top: 160px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 10;
-      }
-
-      .profile-image img {
-        width: 160px;
-        height: 160px;
-        border-radius: 50%;
-        border: 6px solid white;
-        object-fit: cover;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .status-indicator {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 24px;
-        height: 24px;
-        background: white;
-        border-radius: 50%;
-        border: 4px solid white;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .status-indicator::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 12px;
-        height: 12px;
-        background: #4ade80;
-        border-radius: 50%;
-      }
-
-      .card-body {
-        padding: 100px 45px 45px;
-        text-align: center;
-      }
-
-      .current-time {
-        color: #6b7280;
-        font-size: 14px;
-        margin-bottom: 18px;
-        font-family: "Courier New", monospace;
-      }
-
-      #timestamp {
-        color: #374151;
-        font-weight: 600;
-      }
-
-      .name {
-        font-size: 34px;
-        font-weight: 700;
-        color: #1f2937;
-        margin-bottom: 22px;
-      }
-
-      .bio {
-        color: #4b5563;
-        line-height: 1.7;
-        font-size: 15px;
-        margin-bottom: 35px;
-      }
-
-      .divider {
-        height: 3px;
-        background: linear-gradient(90deg, #ff6b6b 0%, #ff5252 100%);
-        border-radius: 2px;
-        margin-bottom: 35px;
-        border: none;
-      }
-
-      .info-section {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 45px;
-        margin-bottom: 40px;
-      }
-
-      .hobbies h2,
-      .dislikes h2 {
-        font-size: 18px;
-        font-weight: 700;
-        color: #1f2937;
-        margin-bottom: 18px;
-      }
-
-      .hobbies ul,
-      .dislikes ul {
-        list-style: none;
-      }
-
-      .hobbies ul li,
-      .dislikes ul li {
-        color: #6b7280;
-        font-size: 14px;
-        margin-bottom: 12px;
-        position: relative;
-        padding-left: 8px;
-      }
-
-      .hobbies ul li::before,
-      .dislikes ul li::before {
-        content: "•";
-        position: absolute;
-        left: -8px;
-        color: #ff6b6b;
-        font-weight: bold;
-      }
-
-      .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-top: 20px;
-      }
-
-      .icon-link {
-        color: #ff5252;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .icon-link:hover {
-        color: #ff6b6b;
-        transform: translateY(-3px);
-      }
-
-      .icon-link svg {
-        width: 28px;
-        height: 28px;
-      }
-
-      /* ========== CONTACT & ABOUT PAGES STYLES ========== */
-      #contact,
-      #about {
-        min-height: calc(100vh - 70px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 40px 20px;
-      }
-
-      .content-card {
-        background: white;
-        border-radius: 15px;
-        padding: 3rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        max-width: 800px;
-        width: 100%;
-      }
-
-      .content-card h1 {
-        color: #667eea;
-        margin-bottom: 1rem;
-        font-size: 2.5rem;
-      }
-
-      .content-card h2 {
-        color: #764ba2;
-        margin-bottom: 1rem;
-        margin-top: 1.5rem;
-        font-size: 1.5rem;
-      }
-
-      .content-card > p {
-        margin-bottom: 1.5rem;
-        line-height: 1.8;
-        color: #4b5563;
-      }
-
-      /* Form Styles */
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        margin-top: 2rem;
-      }
-
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      label {
-        font-weight: 600;
-        color: #333;
-      }
-
-      input,
-      textarea,
-      select {
-        padding: 0.75rem;
-        border: 2px solid #ddd;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-family: inherit;
-        transition: border-color 0.3s;
-        width: 100%;
-      }
-
-      input:focus,
-      textarea:focus,
-      select:focus {
-        outline: none;
-        border-color: #667eea;
-      }
-
-      input.error,
-      textarea.error,
-      select.error {
-        border-color: #e74c3c;
-      }
-
-      .error-message {
-        color: #e74c3c;
-        font-size: 0.875rem;
-        display: none;
-      }
-
-      .error-message.show {
-        display: block;
-      }
-
-      textarea {
-        resize: vertical;
-        min-height: 120px;
-      }
-
-      button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
-        width: 100%;
-      }
-
-      button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-      }
-
-      button:active {
-        transform: translateY(0);
-      }
-
-      .success-message {
-        background: #2ecc71;
-        color: white;
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-        display: none;
-      }
-
-      .success-message.show {
-        display: block;
-      }
-
-      .about-section {
-        margin-bottom: 2rem;
-      }
-
-      .about-section p {
-        margin-bottom: 1rem;
-        line-height: 1.8;
-        color: #4b5563;
-      }
-
-      /* ========== MOBILE VIEW ========== */
-      @media (max-width: 767px) {
-        #home {
-          justify-content: center;
-          align-items: center;
-        }
-
-        .container {
-          max-width: 100%;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .card {
-          margin: 0 auto;
-        }
-
-        .card-body {
-          padding: 100px 35px 40px;
-        }
-
-        .info-section {
-          gap: 35px;
-        }
-
-        .name {
-          font-size: 30px;
-        }
-
-        .bio {
-          font-size: 15px;
-        }
-
-        .content-card {
-          padding: 2rem 1.5rem;
-        }
-
-        .content-card h1 {
-          font-size: 2rem;
-        }
-
-        .content-card h2 {
-          font-size: 1.25rem;
-        }
-
-        nav ul {
-          gap: 1rem;
-        }
-
-        nav a {
-          padding: 0.4rem 0.8rem;
-          font-size: 0.9rem;
-        }
-      }
-
-      /* ========== DESKTOP VIEW (Home Page) ========== */
-      @media (min-width: 768px) {
-        #home {
-          background: linear-gradient(90deg, #ff5252 50%, #ffffff 50%);
-        }
-
-        .container {
-          max-width: 900px;
-        }
-
-        .card {
-          display: flex;
-          flex-direction: row;
-          align-items: stretch;
-          border: 3px solid #ff5252;
-          box-shadow: 0 20px 60px rgba(255, 82, 82, 0.3);
-        }
-
-        .card-header {
-          display: none;
-        }
-
-        .profile-image {
-          position: static;
-          transform: none;
-          background: #fff5f5;
-          padding: 50px 35px 35px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: flex-start;
-          width: 260px;
-          gap: 25px;
-        }
-
-        .profile-image img {
-          width: 150px;
-          height: 150px;
-          border: 5px solid #ff5252;
-          box-shadow: 0 8px 24px rgba(255, 82, 82, 0.3);
-        }
-
-        .social-icons {
-          margin-top: 0;
-          flex-direction: row;
-          gap: 18px;
-        }
-
-        .icon-link {
-          background: #fff5f5;
-          padding: 12px;
-          border-radius: 12px;
-          border: 2px solid #ffe5e5;
-        }
-
-        .icon-link:hover {
-          background: #ff5252;
-          color: white;
-          border-color: #ff5252;
-          transform: translateY(-3px);
-        }
-
-        .card-body {
-          flex: 1;
-          padding: 45px 50px;
-          text-align: left;
-          background: white;
-        }
-
-        .current-time {
-          text-align: right;
-          margin-bottom: 12px;
-          font-size: 12px;
-          border: 2px solid #ff5252;
-          padding: 6px 14px;
-          border-radius: 8px;
-          background: white;
-          color: #4b5563;
-        }
-
-        #timestamp {
-          color: #1f2937;
-        }
-
-        .name {
-          font-size: 42px;
-          margin-bottom: 18px;
-          font-weight: 800;
-          color: #000;
-        }
-
-        .divider {
-          margin-bottom: 28px;
-        }
-
-        .info-section {
-          gap: 70px;
-        }
-
-        .hobbies h2,
-        .dislikes h2 {
-          font-size: 18px;
-          margin-bottom: 14px;
-          font-weight: 800;
-        }
-
-        .hobbies ul li,
-        .dislikes ul li {
-          font-size: 14px;
-          margin-bottom: 10px;
-        }
-
-        .hobbies ul li::before,
-        .dislikes ul li::before {
-          color: #ff5252;
-        }
-      }
-    </style>
+    <title>Profile Card - Idowu Daniel</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <nav role="navigation" aria-label="Main navigation">
-      <ul>
-        <li>
-          <a href="#home" class="nav-link active" data-testid="nav-home"
-            >Home</a
-          >
-        </li>
-        <li>
-          <a href="contact.html" class="nav-link" data-testid="nav-contact"
-            >Contact Us</a
-          >
-        </li>
-        <li>
-          <a href="/aboutme.html" class="nav-link" data-testid="nav-about"
-            >About Me</a
-          >
-        </li>
-      </ul>
+  <body data-test-id="body">
+    <nav class="main-nav" data-test-id="main-navigation">
+      <div class="nav-container">
+        <a href="index.html" class="nav-brand" data-test-id="nav-brand"
+          >Idowu Daniel</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html" data-test-id="nav-home">Home</a></li>
+          <li><a href="aboutme.html" data-test-id="nav-about">About</a></li>
+          <li>
+            <a href="contact.html" class="active" data-test-id="nav-contact"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
     </nav>
 
-    <!-- HOME PAGE (Stage 0) -->
-    <div id="home" class="page active" data-testid="home-page">
-      <main class="container" data-testid="profile-container">
-        <article class="card" data-testid="profile-card">
-          <header class="card-header" data-testid="card-header"></header>
-
-          <figure class="profile-image" data-testid="profile-image">
-            <img src="dan.jpg" alt="Idowu Daniel - Front-end Developer" />
-            <div
-              class="status-indicator"
-              data-testid="status-indicator"
-              aria-label="Online status"
-            ></div>
+    <main class="container" data-test-id="main-container">
+      <article class="profile-card" data-test-id="profile-card">
+        <header class="card-header" data-test-id="card-header">
+          <figure
+            class="profile-image-wrapper"
+            data-test-id="profile-image-wrapper"
+          >
+            <img
+              src="/dan.jpg"
+              alt="Idowu Daniel profile picture"
+              class="profile-image"
+              data-test-id="profile-image"
+            />
           </figure>
+        </header>
 
-          <section class="card-body" data-testid="card-body">
-            <div class="current-time" data-testid="current-time">
-              Current time:
-              <time id="timestamp" data-testid="timestamp"></time> ms
+        <section class="card-body" data-test-id="card-body">
+          <p class="current-time" data-test-id="current-time">
+            Current time:
+            <span id="timestamp" data-test-id="timestamp">1760878317564</span>
+            ms
+          </p>
+
+          <h1 class="profile-name" data-test-id="profile-name">Idowu Daniel</h1>
+
+          <p class="profile-bio" data-test-id="profile-bio">
+            I'm a front-end developer passionate about building clean,
+            responsive, and user-friendly web experiences. I love turning
+            designs into functional interfaces using tools like React, Tailwind
+            CSS, and JavaScript to bring ideas to life.
+          </p>
+
+          <hr class="divider" data-test-id="divider" />
+
+          <div class="info-grid" data-test-id="info-grid">
+            <div class="info-column" data-test-id="hobbies-column">
+              <h2 class="info-title" data-test-id="hobbies-title">Hobbies</h2>
+              <ul class="info-list" data-test-id="hobbies-list">
+                <li data-test-id="hobby-item-1">Exercising</li>
+                <li data-test-id="hobby-item-2">Reading</li>
+                <li data-test-id="hobby-item-3">Coding</li>
+              </ul>
             </div>
 
-            <h1 class="name" data-testid="profile-name">Idowu Daniel</h1>
+            <div class="info-column" data-test-id="dislikes-column">
+              <h2 class="info-title" data-test-id="dislikes-title">Dislikes</h2>
+              <ul class="info-list" data-test-id="dislikes-list">
+                <li data-test-id="dislike-item-1">Laziness</li>
+                <li data-test-id="dislike-item-2">Slow internet</li>
+                <li data-test-id="dislike-item-3">Less work</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-            <p class="bio" data-testid="profile-bio">
-              I'm a front-end developer passionate about building clean,
-              responsive, and user-friendly web experiences. I love turning
-              designs into functional interfaces using tools like React,
-              Tailwind CSS, and JavaScript to bring ideas to life.
-            </p>
-
-            <hr class="divider" data-testid="divider" aria-hidden="true" />
-
-            <section class="info-section" data-testid="info-section">
-              <article class="hobbies" data-testid="hobbies-section">
-                <h2 data-testid="hobbies-heading">Hobbies</h2>
-                <ul data-testid="hobbies-list">
-                  <li data-testid="hobby-item-1">Exercising</li>
-                  <li data-testid="hobby-item-2">Reading</li>
-                  <li data-testid="hobby-item-3">Coding</li>
-                </ul>
-              </article>
-
-              <article class="dislikes" data-testid="dislikes-section">
-                <h2 data-testid="dislikes-heading">Dislikes</h2>
-                <ul data-testid="dislikes-list">
-                  <li data-testid="dislike-item-1">Laziness</li>
-                  <li data-testid="dislike-item-2">Slow internet</li>
-                  <li data-testid="dislike-item-3">Less work</li>
-                </ul>
-              </article>
-            </section>
-
-            <nav
-              class="social-icons"
-              data-testid="social-links"
-              aria-label="Social media links"
+        <footer class="card-footer" data-test-id="card-footer">
+          <nav class="social-links" data-test-id="social-links">
+            <a
+              href="https://wa.me/2349121801655"
+              class="social-link"
+              aria-label="WhatsApp"
+              data-test-id="whatsapp-link"
             >
-              <a
-                href="https://wa.me/2349121801655"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="icon-link"
-                data-testid="message-link"
-                aria-label="Send a message"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                data-test-id="whatsapp-icon"
               >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
-                  ></path>
-                </svg>
-              </a>
-
-              <a
-                href="http://linkedin.com/in/idowu-daniel-144a17363"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="icon-link"
-                data-testid="linkedin-link"
-                aria-label="Visit LinkedIn profile"
+                <path
+                  d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.546 20.2l3.18-.836A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm5.849 14.318c-.243.684-1.434 1.324-1.986 1.363-.511.036-.986.242-3.334-.694-2.976-1.186-4.876-4.174-5.024-4.364-.148-.19-1.21-1.607-1.21-3.064 0-1.458.764-2.175 1.036-2.473.272-.297.593-.371.792-.371.198 0 .396.003.57.01.182.008.428-.07.669.51.243.586.828 2.018.9 2.164.073.146.122.317.025.507-.098.19-.146.308-.291.477-.146.168-.307.375-.439.503-.146.142-.298.296-.128.581.17.284.755 1.244 1.619 2.015 1.112.99 2.052 1.299 2.34 1.445.288.146.456.122.624-.073.169-.196.725-.845.918-1.136.194-.29.387-.242.65-.146.264.097 1.675.79 1.963.934.288.145.48.217.551.338.073.122.073.704-.17 1.388z"
+                />
+              </svg>
+            </a>
+            <a
+              href="http://linkedin.com/in/idowu-daniel-144a17363"
+              class="social-link"
+              aria-label="LinkedIn"
+              data-test-id="linkedin-link"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                data-test-id="linkedin-icon"
               >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                  />
-                </svg>
-              </a>
-
-              <a
-                href="https://github.com/idowu113910"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="icon-link"
-                data-testid="github-link"
-                aria-label="Visit GitHub profile"
+                <path
+                  d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zm-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79zM6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68zm1.39 9.94v-8.37H5.5v8.37h2.77z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://github.com/idowu113910"
+              class="social-link"
+              aria-label="GitHub"
+              data-test-id="github-link"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                data-test-id="github-icon"
               >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                  />
-                </svg>
-              </a>
-            </nav>
-          </section>
-        </article>
-      </main>
-    </div>
+                <path
+                  d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+                />
+              </svg>
+            </a>
+          </nav>
+        </footer>
+      </article>
+    </main>
 
-    <script src="script.js"></script>
+    <script>
+      // Update timestamp to current time
+      function updateTimestamp() {
+        document.getElementById("timestamp").textContent = Date.now();
+      }
+      updateTimestamp();
+      setInterval(updateTimestamp, 1000);
+    </script>
   </body>
 </html>

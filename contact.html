@@ -1,115 +1,406 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Contact Us - Idowu Daniel</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <!-- Navbar -->
-
-    <div id="contact" class="page" data-testid="contact-page">
-      <div class="content-card">
-        <h1>Contact Us</h1>
-        <p>
-          Have a question or want to work together? Fill out the form below and
-          I'll get back to you as soon as possible!
-        </p>
-
-        <div
-          class="success-message"
-          id="successMessage"
-          role="alert"
-          data-testid="success-message"
+  <body data-test-id="body">
+    <nav class="main-nav" data-test-id="main-navigation">
+      <div class="nav-container">
+        <a href="index.html" class="nav-brand" data-test-id="nav-brand"
+          >Idowu Daniel</a
         >
-          Thank you for your message! We'll get back to you soon.
-        </div>
-
-        <form id="contactForm" novalidate data-testid="contact-form">
-          <div class="form-group">
-            <label for="name"
-              >Full Name <span aria-label="required">*</span></label
+        <ul class="nav-links">
+          <li><a href="index.html" data-test-id="nav-home">Home</a></li>
+          <li><a href="aboutme.html" data-test-id="nav-about">About</a></li>
+          <li>
+            <a href="contact.html" class="active" data-test-id="nav-contact"
+              >Contact</a
             >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              data-testid="contact-name"
-              aria-required="true"
-              aria-describedby="nameError"
-            />
-            <span class="error-message" id="nameError" role="alert"
-              >Please enter your full name</span
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="email"
-              >Email Address <span aria-label="required">*</span></label
-            >
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              data-testid="contact-email"
-              aria-required="true"
-              aria-describedby="emailError"
-            />
-            <span class="error-message" id="emailError" role="alert"
-              >Please enter a valid email address</span
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="subject"
-              >Subject <span aria-label="required">*</span></label
-            >
-            <select
-              id="subject"
-              name="subject"
-              required
-              data-testid="contact-subject"
-              aria-required="true"
-              aria-describedby="subjectError"
-            >
-              <option value="">Select a subject</option>
-              <option value="general">General Inquiry</option>
-              <option value="project">Project Collaboration</option>
-              <option value="job">Job Opportunity</option>
-              <option value="feedback">Feedback</option>
-            </select>
-            <span class="error-message" id="subjectError" role="alert"
-              >Please select a subject</span
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="message"
-              >Message <span aria-label="required">*</span></label
-            >
-            <textarea
-              id="message"
-              name="message"
-              required
-              data-testid="contact-message"
-              aria-required="true"
-              aria-describedby="messageError"
-            ></textarea>
-            <span class="error-message" id="messageError" role="alert"
-              >Please enter your message (minimum 10 characters)</span
-            >
-          </div>
-
-          <button type="submit" data-testid="contact-submit">
-            Send Message
-          </button>
-        </form>
+          </li>
+        </ul>
       </div>
-    </div>
+    </nav>
 
-    <script src="/script.js"></script>
+    <main class="page-container" data-test-id="main-container">
+      <section class="contact-section" data-test-id="contact-section">
+        <div class="contact-content">
+          <header class="section-header" data-test-id="contact-header">
+            <h1 data-test-id="contact-title">Get In Touch</h1>
+            <p data-test-id="contact-description">
+              Have a question or want to work together? Feel free to reach out!
+            </p>
+          </header>
+
+          <form
+            id="contactForm"
+            class="contact-form"
+            novalidate
+            data-test-id="contact-form"
+          >
+            <div class="form-group" data-test-id="form-group-name">
+              <label for="fullName" class="form-label">
+                Full Name <span class="required" aria-label="required">*</span>
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                class="form-input"
+                data-testid="test-contact-name"
+                aria-required="true"
+                aria-describedby="error-name"
+                autocomplete="name"
+              />
+              <span
+                id="error-name"
+                class="error-message"
+                data-testid="test-contact-error-name"
+                role="alert"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="form-group" data-test-id="form-group-email">
+              <label for="email" class="form-label">
+                Email Address
+                <span class="required" aria-label="required">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                data-testid="test-contact-email"
+                aria-required="true"
+                aria-describedby="error-email"
+                autocomplete="email"
+              />
+              <span
+                id="error-email"
+                class="error-message"
+                data-testid="test-contact-error-email"
+                role="alert"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="form-group" data-test-id="form-group-subject">
+              <label for="subject" class="form-label">
+                Subject <span class="required" aria-label="required">*</span>
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                class="form-input"
+                data-testid="test-contact-subject"
+                aria-required="true"
+                aria-describedby="error-subject"
+              />
+              <span
+                id="error-subject"
+                class="error-message"
+                data-testid="test-contact-error-subject"
+                role="alert"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="form-group" data-test-id="form-group-message">
+              <label for="message" class="form-label">
+                Message <span class="required" aria-label="required">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-textarea"
+                rows="6"
+                data-testid="test-contact-message"
+                aria-required="true"
+                aria-describedby="error-message"
+              ></textarea>
+              <span
+                id="error-message"
+                class="error-message"
+                data-testid="test-contact-error-message"
+                role="alert"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <button
+              type="submit"
+              class="submit-button"
+              data-testid="test-contact-submit"
+            >
+              Send Message
+            </button>
+
+            <div
+              id="successMessage"
+              class="success-message"
+              data-testid="test-contact-success"
+              role="status"
+              aria-live="polite"
+              style="display: none"
+            >
+              <svg
+                class="success-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                />
+              </svg>
+              <p>
+                Thank you for your message! I'll get back to you as soon as
+                possible.
+              </p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-test-id="site-footer">
+      <p>&copy; 2025 Idowu Daniel. All rights reserved.</p>
+    </footer>
+
+    <script>
+      /* Contact form validation — robust and defensive */
+      document.addEventListener("DOMContentLoaded", () => {
+        // Try to find the form (support multiple naming possibilities)
+        const form =
+          document.getElementById("contactForm") ||
+          document.getElementById("contact-form") ||
+          document.querySelector('[data-test-id="contact-form"]') ||
+          document.querySelector('[data-test-id="contactForm"]');
+
+        if (!form) {
+          console.warn(
+            'Contact form not found. Ensure form id="contactForm" or data-test-id="contact-form" exists.'
+          );
+          return;
+        }
+
+        // Helper: find field by id or data-test-id
+        function findField(nameCandidates = []) {
+          for (const sel of nameCandidates) {
+            const elById = document.getElementById(sel);
+            if (elById) return elById;
+            const elByData =
+              document.querySelector(`[data-test-id="${sel}"]`) ||
+              document.querySelector(`[data-testid="${sel}"]`);
+            if (elByData) return elByData;
+          }
+          return null;
+        }
+
+        // Helper: ensure an error node exists after the input, returns the error element
+        function ensureErrorNode(inputEl, testId) {
+          // if an explicit error element exists (by data attribute), use it
+          let err =
+            document.querySelector(`[data-test-id="${testId}"]`) ||
+            document.querySelector(`[data-testid="${testId}"]`);
+          if (err) return err;
+
+          // otherwise create a small <div class="error-message" ...> after the input
+          err = document.createElement("div");
+          err.className = "error-message";
+          err.setAttribute("aria-live", "polite");
+          err.style.display = "none";
+          if (testId) err.setAttribute("data-test-id", testId);
+          inputEl.insertAdjacentElement("afterend", err);
+          return err;
+        }
+
+        // Find or create success message container
+        let successMessage =
+          document.getElementById("successMessage") ||
+          document.querySelector('[data-test-id="success-message"]') ||
+          document.querySelector('[data-testid="success-message"]');
+        if (!successMessage) {
+          successMessage = document.createElement("div");
+          successMessage.id = "successMessage";
+          successMessage.className = "success-message";
+          successMessage.textContent = "Message sent successfully!";
+          successMessage.style.display = "none";
+          successMessage.setAttribute("role", "status");
+          successMessage.setAttribute("aria-live", "polite");
+          successMessage.style.margin = "1rem 0";
+          form.parentNode.insertBefore(successMessage, form);
+        }
+
+        // Map fields to HTML names/ids you likely have (falling back to several possible names)
+        const fields = {
+          fullName: {
+            element: findField([
+              "name",
+              "fullName",
+              "full-name",
+              "input-name",
+              "inputFullName",
+              "test-contact-name",
+            ]),
+            error: null,
+            validate: (value) => {
+              if (!value || !value.trim()) return "Full name is required";
+              if (value.trim().length < 2)
+                return "Full name must be at least 2 characters";
+              return "";
+            },
+            errorTestId: "test-contact-error-name",
+          },
+          email: {
+            element: findField(["email", "input-email", "test-contact-email"]),
+            error: null,
+            validate: (value) => {
+              if (!value || !value.trim()) return "Email address is required";
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              if (!emailRegex.test(value))
+                return "Please enter a valid email address (e.g., name@example.com)";
+              return "";
+            },
+            errorTestId: "test-contact-error-email",
+          },
+          subject: {
+            element: findField([
+              "subject",
+              "input-subject",
+              "test-contact-subject",
+            ]),
+            error: null,
+            validate: (value) => {
+              if (!value || !value.trim()) return "Subject is required";
+              if (value.trim().length < 3)
+                return "Subject must be at least 3 characters";
+              return "";
+            },
+            errorTestId: "test-contact-error-subject",
+          },
+          message: {
+            element: findField([
+              "message",
+              "input-message",
+              "test-contact-message",
+            ]),
+            error: null,
+            validate: (value) => {
+              if (!value || !value.trim()) return "Message is required";
+              if (value.trim().length < 10)
+                return "Message must be at least 10 characters";
+              return "";
+            },
+            errorTestId: "test-contact-error-message",
+          },
+        };
+
+        // Ensure all elements exist; if not, warn and skip missing ones
+        Object.keys(fields).forEach((key) => {
+          const f = fields[key];
+          if (!f.element) {
+            console.warn(
+              `Contact form: input for "${key}" not found. Expected ids/data-test-id like: ${f.errorTestId} or name/id variants.`
+            );
+            return;
+          }
+          // create/find the associated error element
+          f.error = ensureErrorNode(f.element, f.errorTestId);
+        });
+
+        // Utility to show/hide errors
+        function showError(fieldName, message) {
+          const f = fields[fieldName];
+          if (!f || !f.element) return;
+          if (f.error) {
+            f.error.textContent = message || "";
+            f.error.style.display = message ? "block" : "none";
+          }
+          f.element.classList.toggle("input-error", !!message);
+          f.element.setAttribute("aria-invalid", !!message ? "true" : "false");
+        }
+
+        function validateField(fieldName) {
+          const f = fields[fieldName];
+          if (!f || !f.element) return true;
+          const val = f.element.value || "";
+          const errMsg = f.validate(val);
+          showError(fieldName, errMsg);
+          return !errMsg;
+        }
+
+        function validateForm() {
+          let ok = true;
+          Object.keys(fields).forEach((name) => {
+            // only validate if field exists
+            if (fields[name].element) {
+              if (!validateField(name)) ok = false;
+            }
+          });
+          return ok;
+        }
+
+        // Attach listeners (if elements exist)
+        Object.keys(fields).forEach((name) => {
+          const f = fields[name];
+          if (!f || !f.element) return;
+          f.element.addEventListener("blur", () => validateField(name));
+          f.element.addEventListener("input", () => {
+            // live-validate only if an error is currently shown
+            if (f.error && f.error.textContent) validateField(name);
+          });
+          f.element.addEventListener("focus", () => {
+            f.element.classList.remove("input-error");
+          });
+        });
+
+        // Submit handler
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          // hide previous success
+          successMessage.style.display = "none";
+
+          const ok = validateForm();
+          if (!ok) {
+            // focus first error
+            const first = Object.keys(fields).find(
+              (n) => fields[n].error && fields[n].error.textContent
+            );
+            if (first) fields[first].element.focus();
+            return;
+          }
+
+          // Simulate success - show banner and reset
+          successMessage.style.display = "block";
+          successMessage.focus?.(); // if focusable
+
+          // reset form fields
+          form.reset();
+
+          // clear errors
+          Object.keys(fields).forEach((n) => {
+            if (fields[n].error) {
+              fields[n].error.textContent = "";
+              fields[n].error.style.display = "none";
+            }
+            if (fields[n].element) {
+              fields[n].element.classList.remove("input-error");
+              fields[n].element.setAttribute("aria-invalid", "false");
+            }
+          });
+
+          // hide success message after 5s
+          setTimeout(() => {
+            successMessage.style.display = "none";
+          }, 5000);
+        });
+      });
+    </script>
   </body>
 </html>
